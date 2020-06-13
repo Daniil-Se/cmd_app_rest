@@ -3,8 +3,18 @@ from flask import request, json
 app = Flask(__name__)
 
 
+
+@app.route('/get', methods=['GET'])
+def test_get():
+	print('Данные успешно отправлены')
+	return json.dumps({
+                "Данные": "Данные"
+            })
+
+
+
 @app.route('/post', methods=['POST'])
-def test():
+def test_post():
 	print('Данные успешно получены')
 	data = request.get_json()
 	print(data)

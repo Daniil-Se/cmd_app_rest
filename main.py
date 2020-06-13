@@ -5,15 +5,25 @@ class App:
 
 	def input_command(self):
 		command = input('Ожидание команды: ')
-		if command == 'test':
-			self.test()
+		if command == 'post':
+			self.push_post()
+		elif command == 'get':
+			self.push_get()	
 		elif command == 'exit':
 			self.exit()
 		else:
 			self.unknown_command()
 	
-	def test(self):
-		r = requests.post('http://127.0.0.1:5000/post', json={"key": "value"})
+	def push_post(self):
+		r = requests.post('http://127.0.0.1:5000/post', 
+						   json={"Name": "John",
+						   		 "Age": '23',
+						   		 "Shopping_list": ['milk', 'chocolate']})
+		print(r.status_code, r.json())
+		self.input_command()
+
+	def push_get(self):
+		r = requests.get('http://127.0.0.1:5000/get')
 		print(r.status_code, r.json())
 		self.input_command()
 
